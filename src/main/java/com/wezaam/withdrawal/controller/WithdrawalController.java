@@ -1,4 +1,4 @@
-package com.wezaam.withdrawal.rest;
+package com.wezaam.withdrawal.controller;
 
 import com.wezaam.withdrawal.model.Withdrawal;
 import com.wezaam.withdrawal.model.WithdrawalScheduled;
@@ -28,7 +28,7 @@ public class WithdrawalController {
     @Autowired
     private ApplicationContext context;
     @Autowired
-    private UserController userController;
+    private UsersController usersController;
 
     @PostMapping("/create-withdrawals")
     public ResponseEntity create(HttpServletRequest request) {
@@ -40,7 +40,7 @@ public class WithdrawalController {
             return new ResponseEntity("Required params are missing", HttpStatus.BAD_REQUEST);
         }
         try {
-            userController.findById(Long.parseLong(userId));
+            usersController.findById(Long.parseLong(userId));
         } catch (Exception e) {
             return new ResponseEntity("User not found", HttpStatus.NOT_FOUND);
         }
